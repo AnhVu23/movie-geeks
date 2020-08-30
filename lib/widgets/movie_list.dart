@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_geeks/blocs/movie_detail_provider.dart';
 import '../models/item.dart';
 import '../blocs/movies.dart';
 import './movie_detail.dart';
@@ -59,13 +60,15 @@ class MovieListState extends State<MovieList> {
 
   openDetailPage(ItemModel data, int index) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return MovieDetail(
-        title: data.results[index].title,
-        posterUrl: data.results[index].backdrop_path,
-        description: data.results[index].overview,
-        releaseDate: data.results[index].release_date,
-        voteAverage: data.results[index].vote_average.toString(),
-        movieId: data.results[index].id,
+      return MovieDetailBlocProvider(
+        child: MovieDetail(
+          title: data.results[index].title,
+          posterUrl: data.results[index].backdrop_path,
+          description: data.results[index].overview,
+          releaseDate: data.results[index].release_date,
+          voteAverage: data.results[index].vote_average.toString(),
+          movieId: data.results[index].id,
+        ),
       );
     }));
   }
